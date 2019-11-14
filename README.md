@@ -8,7 +8,7 @@ docker-machine restart
 eval $(docker-machine env default)
 
 # Build image
-docker image build -t name .
+docker image build -t test .
 
 # Clear
 docker system prune
@@ -17,7 +17,7 @@ docker image prune
 docker image prune -a
 
 # Run container
-docker run -tid --rm --privileged --name test -p 80:80 -p 3306:3306 -p 8080:8080 -p 33060:33060 -p 443:443 test
+docker run -tid --rm --privileged --name test -p 443:443 -p 80:80 -p 8080:8080 test
 
 # Stop container
 docker container stop test

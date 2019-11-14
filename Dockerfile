@@ -6,7 +6,7 @@
 #    By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/12 17:30:14 by ncolomer          #+#    #+#              #
-#    Updated: 2019/11/13 17:11:28 by ncolomer         ###   ########.fr        #
+#    Updated: 2019/11/14 13:06:08 by ncolomer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,6 @@ RUN unzip -q /var/www/html/phpmyadmin.zip -d /var/www/html; \
 COPY srcs/www.conf /etc/php/7.3/fpm/pool.d/
 COPY srcs/index.html /var/www/html
 COPY srcs/default /etc/nginx/sites-available/
-RUN chown -R www-data:www-data /var/www/html/wordpress
 
 # SSL
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
@@ -63,4 +62,4 @@ CMD	service mysql start; \
 	sleep infinity & wait
 
 # Expose the ports
-EXPOSE 8080 80 3306 33060 443
+EXPOSE 8080 80 443
