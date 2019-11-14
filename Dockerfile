@@ -6,14 +6,14 @@
 #    By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/12 17:30:14 by ncolomer          #+#    #+#              #
-#    Updated: 2019/11/14 13:06:08 by ncolomer         ###   ########.fr        #
+#    Updated: 2019/11/14 19:06:31 by ncolomer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FROM debian:buster
 
-ENV PASSWORD 		'admin'
-ENV USER_WORDPRESS	'ncolomer'
+ENV USERNAME	'admin'
+ENV PASSWORD	'admin'
 
 # Utility
 RUN apt-get update; \
@@ -55,11 +55,11 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 CMD	service mysql start; \
 	service nginx start; \
 	service php7.3-fpm start; \
-	mysql -u root -p$PASSWORD -e "CREATE USER '$USER_WORDPRESS'@'localhost' identified by '$PASSWORD';" ;\
+	mysql -u root -p$PASSWORD -e "CREATE USER '$USERNAME'@'localhost' identified by '$PASSWORD';" ;\
 	mysql -u root -p$PASSWORD -e "CREATE DATABASE wordpress;"; \
-	mysql -u root -p$PASSWORD -e "GRANT ALL PRIVILEGES ON wordpress.* TO '$USER_WORDPRESS'@'localhost';" ;\
+	mysql -u root -p$PASSWORD -e "GRANT ALL PRIVILEGES ON wordpress.* TO '$USERNAME'@'localhost';" ;\
 	mysql -u root -p$PASSWORD -e "FLUSH PRIVILEGES;" ;\
 	sleep infinity & wait
 
 # Expose the ports
-EXPOSE 8080 80 443
+EXPOSE 8080 80 443 3306 33060
