@@ -2,10 +2,10 @@ server {
     listen 80;
     listen   [::]:80 default ipv6only=on;
 
-    # listen 443 ssl;
-    # ssl on;
-    # ssl_certificate /etc/ssl/certs/localhost.crt;
-    # ssl_certificate_key /etc/ssl/certs/localhost.key;
+    listen 443 ssl;
+    ssl on;
+    ssl_certificate /etc/ssl/certs/localhost.crt;
+    ssl_certificate_key /etc/ssl/certs/localhost.key;
 
     root /var/www/html;
     index index.php index.html index.htm;
